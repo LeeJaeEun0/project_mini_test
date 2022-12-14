@@ -10,4 +10,8 @@ df = pd.read_csv('./pro_mini_test/monthly_subway_statistics_in_seoul.csv', encod
 df.set_index = df['연번']
 
 if st.button('data copyright link'):
-     st.write('https://www.data.go.kr/data/15044247/fileData.do')
+    st.write('https://www.data.go.kr/data/15044247/fileData.do')
+
+if st.checkbox('Show raw data'):
+    st.subheader('Raw data')
+    st.write(df)  
