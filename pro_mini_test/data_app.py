@@ -33,3 +33,15 @@ e_station = df[['역명', '2021년1월', '2021년2월', '2021년3월', '2021년4
 e_station.rename(columns=e_station.iloc[0], inplace=True)
 e_station = e_station.drop(e_station.index[0])
 st.line_chart(e_station)
+
+st.subheader('호선별 하차 인원')
+df_line = df.groupby('호선').sum()
+lines = df_line.index.tolist()
+option = st.selectbox(
+    'Select Line', 
+    (lines))
+
+line_data = df_line.loc[(df_line.index == option)]
+line_data = line_data[line_data.columns.difference(['연번', '호선', '역번호', '역명'])]
+l_index = line_data.index.tolist()
+st.area_chart(line_data.loc[l_index[0]], use_container_width=True)
